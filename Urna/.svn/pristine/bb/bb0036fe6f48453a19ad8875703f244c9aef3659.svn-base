@@ -1,0 +1,17 @@
+.painel {
+	position: relative;
+	left: 60%;
+}
+
+.c1 {
+	text-align: center;
+	color: green;
+}
+
+.c2 {
+	text-align: center;
+}
+
+.c3 {
+	text-align: center;
+}

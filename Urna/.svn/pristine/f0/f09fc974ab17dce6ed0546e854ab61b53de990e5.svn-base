@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans default-autowire="byName" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-2.0.1.xsd" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:security="http://www.springframework.org/schema/security">
+
+	<!-- data source 
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost/eleicao" />
+		<property name="username" value="root" />
+		<property name="password" value="502010" />
+    </bean>-->
+    
+    <bean id="httpSessionContextIntegrationFilter" class="org.springframework.security.context.HttpSessionContextIntegrationFilter"/>
+    <bean id="anonymousProcessingFilter" class="org.springframework.security.providers.anonymous.AnonymousProcessingFilter">
+    	<property name="key" value="anonymous" /> 
+		<property name="userAttribute"> 
+			<bean class="org.springframework.security.userdetails.memory.UserAttribute">
+				<property name="authoritiesAsString" value="IS_AUTHENTICATED_ANONYMOUSLY"/>
+				<property name="password" value="asd2121rassdwqed"/>
+			</bean>
+		</property>
+    </bean>
+    <bean class="org.springframework.security.wrapper.SecurityContextHolderAwareRequestFilter" id="securityContextHolderAwareRequestFilter"/> 
+    <bean class="org.springframework.security.ui.SessionFixationProtectionFilter" id="sessionFixationProtectionFilter"/> 
+    <bean class="org.springframework.security.ui.AccessDeniedHandlerImpl" id="accessDeniedHandler"/>
+    <bean class="org.springframework.security.vote.AffirmativeBased" id="accessDecisionManager">
+    	<property name="decisionVoters">
+    		<list>
+    			<bean class="org.springframework.security.vote.AuthenticatedVoter"/>
+    			<bean class="org.springframework.security.vote.RoleVoter"/>
+    		</list>
+    	</property>
+    </bean>
+   
+    <bean id="springSecurityFilterChain" class="org.springframework.security.util.FilterChainProxy">
+    	<security:filter-chain-map path-type="ant">
+    		<security:filter-chain pattern="/candidato/**" filters="httpSessionContextIntegrationFilter, anonymousProcessingFilter, candidatoLogoutFilter,
+    			candidatoAuthenticationProcessingFilter, securityContextHolderAwareRequestFilter,candidatoExceptionTranslationFilter, sessionFixationProtectionFilter,
+    			candidatoFilterSecurityInterceptor"/>
+    		<security:filter-chain pattern="/fiscal/**" filters="httpSessionContextIntegrationFilter, anonymousProcessingFilter, fiscalLogoutFilter,
+    			fiscalAuthenticationProcessingFilter, securityContextHolderAwareRequestFilter,fiscalExceptionTranslationFilter, sessionFixationProtectionFilter,
+    			fiscalFilterSecurityInterceptor"/>
+    		<security:filter-chain pattern="/eleitor/**" filters="httpSessionContextIntegrationFilter, anonymousProcessingFilter, eleitorLogoutFilter,
+    			eleitorAuthenticationProcessingFilter, securityContextHolderAwareRequestFilter,eleitorExceptionTranslationFilter, sessionFixationProtectionFilter,
+    			eleitorFilterSecurityInterceptor"/>
+    		<security:filter-chain pattern="/**" filters="httpSessionContextIntegrationFilter, anonymousProcessingFilter, securityContextHolderAwareRequestFilter"/>
+    	</security:filter-chain-map>
+    </bean>
+    
+    
+    
+    <!-- candidato -->
+    <bean id="candidatoAuthenticationProcessingFilter" class="org.springframework.security.ui.webapp.AuthenticationProcessingFilter">
+    	<property name="invalidateSessionOnSuccessfulAuthentication" value="true"/>
+    	<property name="authenticationManager" ref="_authenticationManager"/>
+    	<property name="authenticationFailureUrl" value="/loginc.xhtml?erro=true"/>
+    	<property name="defaultTargetUrl" value="/candidato/inicio.xhtml"/>
+    	<property name="filterProcessesUrl" value="/candidato/j_spring_security_check"/>
+    </bean>
+    
+    <bean id="candidatoLogoutFilter" class="org.springframework.security.ui.logout.LogoutFilter">
+    	<constructor-arg value="/"/>
+    	<constructor-arg>
+    		<list>
+    			<bean class="org.springframework.security.ui.logout.SecurityContextLogoutHandler"/>
+    		</list>
+    	</constructor-arg>
+    	<property name="filterProcessesUrl" value="/candidato/j_spring_security_logout"/>
+    </bean>
+    
+    <bean id="candidatoExceptionTranslationFilter" class="org.springframework.security.ui.ExceptionTranslationFilter">
+    	<property name="authenticationEntryPoint">
+    		<bean class="org.springframework.security.ui.webapp.AuthenticationProcessingFilterEntryPoint">
+    			<property name="loginFormUrl" value="/loginc.xhtml"/>
+                <property name="forceHttps" value="false"/>
+    		</bean>
+    	</property>
+    	<property name="accessDeniedHandler" ref="accessDeniedHandler"/>
+    </bean>
+    
+    <bean id="candidatoFilterSecurityInterceptor" class="org.springframework.security.intercept.web.FilterSecurityInterceptor">
+    	<property name="accessDecisionManager" ref="accessDecisionManager"/>
+        <property name="authenticationManager" ref="_authenticationManager"/>
+        <property name="objectDefinitionSource" ref="candidatoInterceptUrlDefinition"/>
+    </bean>
+    
+    
+    <!-- fiscal -->
+    <bean id="fiscalAuthenticationProcessingFilter" class="org.springframework.security.ui.webapp.AuthenticationProcessingFilter">
+    	<property name="invalidateSessionOnSuccessfulAuthentication" value="true"/>
+    	<property name="authenticationManager" ref="_authenticationManager"/>
+    	<property name="authenticationFailureUrl" value="/loginf.xhtml?erro=true"/>
+    	<property name="defaultTargetUrl" value="/fiscal/inicio.xhtml"/>
+    	<property name="filterProcessesUrl" value="/fiscal/j_spring_security_check"/>
+    </bean>
+    
+    <bean id="fiscalLogoutFilter" class="org.springframework.security.ui.logout.LogoutFilter">
+    	<constructor-arg value="/"/>
+    	<constructor-arg>
+    		<list>
+    			<bean class="org.springframework.security.ui.logout.SecurityContextLogoutHandler"/>
+    		</list>
+    	</constructor-arg>
+    	<property name="filterProcessesUrl" value="/fiscal/j_spring_security_logout"/>
+    </bean>
+    
+    <bean id="fiscalExceptionTranslationFilter" class="org.springframework.security.ui.ExceptionTranslationFilter">
+    	<property name="authenticationEntryPoint">
+    		<bean class="org.springframework.security.ui.webapp.AuthenticationProcessingFilterEntryPoint">
+    			<property name="loginFormUrl" value="/loginf.xhtml"/>
+                <property name="forceHttps" value="false"/>
+    		</bean>
+    	</property>
+    	<property name="accessDeniedHandler" ref="accessDeniedHandler"/>
+    </bean>
+    
+    <bean id="fiscalFilterSecurityInterceptor" class="org.springframework.security.intercept.web.FilterSecurityInterceptor">
+    	<property name="accessDecisionManager" ref="accessDecisionManager"/>
+        <property name="authenticationManager" ref="_authenticationManager"/>
+        <property name="objectDefinitionSource" ref="fiscalInterceptUrlDefinition"/>
+    </bean>
+    
+    
+    <!-- eleitor -->
+    <bean id="eleitorAuthenticationProcessingFilter" class="org.springframework.security.ui.webapp.AuthenticationProcessingFilter">
+    	<property name="invalidateSessionOnSuccessfulAuthentication" value="true"/>
+    	<property name="authenticationManager" ref="_authenticationManager"/>
+    	<property name="authenticationFailureUrl" value="/ident.xhtml?erro=true"/>
+    	<property name="defaultTargetUrl" value="/eleitor/inicio.xhtml"/>
+    	<property name="filterProcessesUrl" value="/eleitor/j_spring_security_check"/>
+    </bean>
+    
+    <bean id="eleitorLogoutFilter" class="org.springframework.security.ui.logout.LogoutFilter">
+    	<constructor-arg value="/"/>
+    	<constructor-arg>
+    		<list>
+    			<bean class="org.springframework.security.ui.logout.SecurityContextLogoutHandler"/>
+    		</list>
+    	</constructor-arg>
+    	<property name="filterProcessesUrl" value="/eleitor/j_spring_security_logout"/>
+    </bean>
+    
+    <bean id="eleitorExceptionTranslationFilter" class="org.springframework.security.ui.ExceptionTranslationFilter">
+    	<property name="authenticationEntryPoint">
+    		<bean class="org.springframework.security.ui.webapp.AuthenticationProcessingFilterEntryPoint">
+    			<property name="loginFormUrl" value="/ident.xhtml"/>
+                <property name="forceHttps" value="false"/>
+    		</bean>
+    	</property>
+    	<property name="accessDeniedHandler" ref="accessDeniedHandler"/>
+    </bean>
+    
+    <bean id="eleitorFilterSecurityInterceptor" class="org.springframework.security.intercept.web.FilterSecurityInterceptor">
+    	<property name="accessDecisionManager" ref="accessDecisionManager"/>
+        <property name="authenticationManager" ref="_authenticationManager"/>
+        <property name="objectDefinitionSource" ref="eleitorInterceptUrlDefinition"/>
+    </bean>
+    
+    <!-- candidato regras -->
+    <security:filter-invocation-definition-source id="candidatoInterceptUrlDefinition">
+    	<security:intercept-url pattern="/login*" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <security:intercept-url pattern="/candidato/logout*" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <security:intercept-url pattern="/candidato/**" access="ROLE_CANDIDATO"/>
+    </security:filter-invocation-definition-source>
+    
+    
+    <!-- fiscal regras -->
+    <security:filter-invocation-definition-source id="fiscalInterceptUrlDefinition">
+    	<security:intercept-url pattern="/login*" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <security:intercept-url pattern="/fiscal/logout*" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <security:intercept-url pattern="/fiscal/**" access="ROLE_FISCAL"/>
+    </security:filter-invocation-definition-source>
+    
+    
+    <!-- eleitor regras -->
+    <security:filter-invocation-definition-source id="eleitorInterceptUrlDefinition">
+    	<security:intercept-url pattern="/eleitor/login*" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <security:intercept-url pattern="/eleitor/logout*" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <security:intercept-url pattern="/eleitor/**" access="ROLE_ELEITOR"/>
+    </security:filter-invocation-definition-source>
+    
+    <!--<sec:http auto-config="true"   access-denied-page="/negado.xhtml">
+    	<sec:form-login login-page="/loginc.xhtml" default-target-url="/candidato/inicio.xhtml" authentication-failure-url="/loginc.xhtml?erro=true" />
+    	<sec:form-login login-page="/loginf.xhtml"  authentication-failure-url="/loginf.xhtml?erro=true"/>
+    	<sec:form-login login-page="/ident.xhtml"  authentication-failure-url="/ident.xhtml?erro=true"/>
+       	<sec:intercept-url pattern="/candidato/**" access="ROLE_CANDIDATO" />
+       	<sec:intercept-url pattern="/fiscal/**" access="ROLE_FISCAL"/>
+       	<sec:intercept-url pattern="/eleitor/**" access="ROLE_ELEITOR"/>
+    	<sec:intercept-url pattern="/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+	</sec:http>-->
+	
+	<security:authentication-provider>
+        <security:user-service>
+          <security:user name="ANDERSON DIAS" password="0130326184" authorities="ROLE_ELEITOR" />
+          <security:user name="ZAKK" password="zakk1234" authorities="ROLE_CANDIDATO" />
+          <security:user name="DARRELL" password="darrell1234" authorities="ROLE_CANDIDATO"/>
+          <security:user name="SLASH" password="slash1234" authorities="ROLE_CANDIDATO"/>
+          <security:user name="ADMIN" password="admin1234" authorities="ROLE_FISCAL"/>
+        </security:user-service>
+    </security:authentication-provider>
+
+	
+    	<!--<security:authentication-provider >
+        	<security:jdbc-user-service data-source-ref="dataSource" 
+            users-by-username-query="SELECT login, senha, 'true' as enable FROM usuario  WHERE login=?"
+            authorities-by-username-query="SELECT login, permissao FROM usuario WHERE login=?"/>
+    	</security:authentication-provider>-->
+	
+	
+</beans>

@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/WEB-INF/templates/template.xhtml">
+<ui:define name="conteudo">
+<h:body styleClass="corpo">
+<h:outputStylesheet name="Urna.css" library="css"/>
+<br/>
+	<p:panelGrid columns="3" styleClass="grid2">
+		<p:outputLabel value="Bem vindo fiscal: #{logadoBean.logado()}"/><a href="/Urna/fiscal/j_spring_security_logout">logout</a>
+		<a href="/Urna/index.xhtml">voltar</a>
+	</p:panelGrid>
+	<br/>
+	<br/>
+		<p:outputLabel value="ACOMPANHAMENTO DA VOTAÇÃO" styleClass="texto2"/>
+		<br/>
+		<br/>
+		<center>
+		<p:panelGrid columns="1" styleClass="grafico2">
+			<p:lineChart value="#{graficoFiscalBean.categoryModel}" legendPosition="nw" title="Resultado parcial dos votos" animate="true" styleClass="linha"
+							minX="0" minY="0" maxY="100"/>
+		</p:panelGrid>
+		</center>
+<br/>
+<br/>
+<br/>
+<br/>
+</h:body>
+</ui:define>
+</ui:composition>
+</html>

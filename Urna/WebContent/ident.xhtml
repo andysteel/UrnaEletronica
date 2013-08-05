@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+<ui:composition template="/WEB-INF/templates/template.xhtml">
+<ui:define name="conteudo">
+<h:body styleClass="corpo">
+<h:outputStylesheet name="Urna.css" library="css"/>
+<br/>
+	<p:panelGrid columns="3" styleClass="grid2">
+		<p:outputLabel value="clique"/><a href="index.xhtml">aqui</a><p:outputLabel value="para voltar"/>
+	</p:panelGrid>
+<br/>
+<br/>
+		<p:outputLabel value="Por favor identifique-se para iniciar sua votação" styleClass="texto1"/>
+		<br/>
+		<br/>
+		
+		<form action="/Urna/eleitor/j_spring_security_check" method="post" id="login">
+			<h:panelGrid  columns="1"  cellspacing="10" id="pan" styleClass="grid4">
+				<h:outputLabel value="ELEITOR" for="j_username" />
+				<h:inputText id="j_username" size="35" required="true"/>
+				
+				<h:outputLabel value="RG" for="j_password" />
+				<h:inputText id="j_password" size="35" required="true"/>
+				
+				<h:commandButton value="entrar"/> 
+			</h:panelGrid>
+			<h:outputText value="Eleitor ou RG incorretos!!" rendered="#{param.erro}" style="color: red"/>
+		</form> 
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+</h:body>
+</ui:define>
+</ui:composition>
+</html>

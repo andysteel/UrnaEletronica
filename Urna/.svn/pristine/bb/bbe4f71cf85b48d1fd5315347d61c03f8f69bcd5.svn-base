@@ -1,0 +1,37 @@
+package com.gmail.andresoninfonet.urna.managedbeans;
+
+import java.io.Serializable;
+
+import javax.faces.bean.ManagedBean;
+
+import com.gmail.andresoninfonet.urna.dao.CandidatoDAO;
+import com.gmail.andresoninfonet.urna.modelo.Candidato;
+
+
+@ManagedBean
+public class CandidatoBean implements Serializable{
+
+	private static final long serialVersionUID = -7833642076160065807L;
+	
+	private Candidato c = new Candidato();
+	private CandidatoDAO dao = new CandidatoDAO();
+	
+	
+	public Candidato getC() {
+		return c;
+	}
+	public void setC(Candidato c) {
+		this.c = c;
+	}
+	public CandidatoDAO getDao() {
+		return dao;
+	}
+	public void setDao(CandidatoDAO dao) {
+		this.dao = dao;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	
+	
+}

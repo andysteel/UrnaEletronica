@@ -1,0 +1,28 @@
+<p:panel header="Urna Eletrônica" styleClass="urna">
+
+		Escolha seu candidato na lista abaixo e clique em Descrição
+		<br/>
+		<br/>
+		<h:form>
+	   		<p:selectOneMenu hideNoSelectionOption="false" value="#{candidatoBean.idCandidatoSelecionado}">
+	   			
+	   			<f:selectItems
+	   				value="#{candidatoBean.lista}"
+	   				var="candidato"
+	   				noSelectionValue="true"
+	   				itemValue="#{candidato.c_id}"
+	   				itemLabel="#{candidato.nome}">
+	   			</f:selectItems>
+	   		</p:selectOneMenu>
+	   		<h:commandButton value="Descrição" action="#{candidatoBean.carregaCandidato}"></h:commandButton>
+	   		
+	   </h:form>
+	   
+	   <ui:include src="/WEB-INF/includes/candidato-info.xhtml">
+	   		<ui:param name="candidato" value="#{candidatoBean.candidatoSelecionado}"></ui:param>
+	   </ui:include>
+	   <br/>		
+	   <br/>
+	   <p:commandButton value="Votar" actionListener="#{candidatoBean.atualiza}" styleClass="vota"/>	
+
+</p:panel>

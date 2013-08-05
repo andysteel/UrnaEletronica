@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/WEB-INF/templates/template.xhtml">
+	
+	<ui:define name="conteudo">
+	    <h:body styleClass="corpo">
+	    <h:outputStylesheet name="Urna.css" library="css"/>
+	    <br/>
+	    <p:panelGrid columns="1" styleClass="grid2">
+	    	<a href="/Urna/index.xhtml">voltar</a>
+	    </p:panelGrid>
+	    	<center><p:outputLabel value="Candidato SLASH" styleClass="texto1"/></center>
+	    	<br/>
+	    	
+	    	<center>
+	    	<p:panelGrid columns="2">
+	    		<p:outputLabel value="Veja as fotos da campanha" styleClass="texto1"/>
+	    		<p:outputLabel value="Assista entrevista com Slash" styleClass="texto1"/>
+	    		
+	    		<p:graphicImage value="/resources/gallery.png" id="img" style="cursor:pointer" styleClass="galeria"/>	    	
+	    		<p:media value="http://www.youtube.com/v/Le5Vuvs1vKg" width="420" height="315" player="flash"/>
+	    	</p:panelGrid>
+	    	</center>
+	    
+	    	<p:overlayPanel id="imgPanel" for="img" showEffect="blind" hideEffect="explode" showEvent="mouseover" hideEvent="mousedown"  
+                dismissable="false" showCloseIcon="true">  
+	    		<p:imageSwitch effect="turnDown" id="imgSwitch" style="width:300px;height:188px;">
+	    			<ui:repeat var="image" value="#{imagensBean.lista}">
+	    				<p:graphicImage value="#{image}" width="300"/>
+	    			</ui:repeat>
+	    		</p:imageSwitch>
+	    	</p:overlayPanel>
+	    	<br/>
+	    	
+	    	<center><p:outputLabel value="Candidato ZAKK" styleClass="texto1"/></center>
+	    	<br/>
+	    	
+	    	<center>
+	    	<p:panelGrid columns="2">
+	    		<p:outputLabel value="Veja as fotos da campanha" styleClass="texto1"/>
+	    		<p:outputLabel value="Assista entrevista com Zakk" styleClass="texto1"/>
+	    		
+	    		<p:graphicImage value="/resources/gallery.png" id="img2" style="cursor:pointer" styleClass="galeria"/>	    	
+	    		<p:media value="http://www.youtube.com/v/CrBZdBCqbdY" width="420" height="315" player="flash"/>
+	    	</p:panelGrid>
+	    	</center>
+	    
+	    	<p:overlayPanel id="imgPanel2" for="img2" showEffect="blind" hideEffect="explode" showEvent="mouseover" hideEvent="mousedown"  
+                dismissable="false" showCloseIcon="true">  
+	    		<p:imageSwitch effect="turnDown" id="imgSwitch2" style="width:300px;height:188px;">
+	    			<ui:repeat var="image" value="#{imagensBean.lista2}">
+	    				<p:graphicImage value="#{image}" width="300"/>
+	    			</ui:repeat>
+	    		</p:imageSwitch>
+	    	</p:overlayPanel>
+	    	<br/>
+	    	
+	    	<center><p:outputLabel value="Candidato DARRELL" styleClass="texto1"/></center>
+	    	<br/>
+	    	
+	    	<center>
+	    	<p:panelGrid columns="2">
+	    		<p:outputLabel value="Veja as fotos da campanha" styleClass="texto1"/>
+	    		<p:outputLabel value="Assista entrevista com Darrell" styleClass="texto1"/>
+	    		
+	    		<p:graphicImage value="/resources/gallery.png" id="img3" style="cursor:pointer" styleClass="galeria"/>	    	
+	    		<p:media value="http://www.youtube.com/v/K-oP5Kds7yU" width="420" height="315" player="flash"/>
+	    	</p:panelGrid>
+	    	</center>
+	    
+	    	<p:overlayPanel id="imgPanel3" for="img3" showEffect="blind" hideEffect="explode" showEvent="mouseover" hideEvent="mousedown"  
+                dismissable="false" showCloseIcon="true">  
+	    		<p:imageSwitch effect="turnDown" id="imgSwitch3" style="width:300px;height:188px;">
+	    			<ui:repeat var="image" value="#{imagensBean.lista3}">
+	    				<p:graphicImage value="#{image}" width="300"/>
+	    			</ui:repeat>
+	    		</p:imageSwitch>
+	    	</p:overlayPanel>
+	    	<br/>
+	    	
+	   	<br/>	
+	   	<br/>
+	   	<br/>
+	   	<br/>
+	    </h:body>
+	</ui:define>
+	
+</ui:composition>
+</html>

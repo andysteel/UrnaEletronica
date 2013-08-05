@@ -1,0 +1,93 @@
+.painel {
+	position: relative;
+	left: 60%;
+}
+
+.texto1 {
+	font-family: sans-serif;
+	color: white;
+	font-size: 22pt;
+}
+
+.c2 {
+	text-align: center;
+}
+
+.c3 {
+	text-align: center;
+}
+
+.urna {
+	height: 640px;
+	width: 550px;
+	position: relative;
+	left: 30%;
+	font-size: 17pt;
+	
+}
+
+.vota {
+	position: relative;
+	left: 200px;
+}
+
+.corpo {
+	background-color: #4f4f4f;
+}
+
+.grid1 {
+	position: relative;
+	left: 30%;
+}
+
+.grid2 {
+	font-size: 10pt;
+	position: relative;
+	float: right;
+}
+
+.grid3 {
+	position: relative;
+	left: 20%;
+}
+
+.grid4 {
+	background-color: rgb(170,239,78);
+	color: rgb(99,182,16); 
+}
+
+.grafico {
+	width: 300px;
+	height: 400px;
+}
+
+.texto2 {
+	font-family: sans-serif;
+	color: white;
+	font-size: 22pt;
+	position: relative;
+	left: 20%
+}
+
+.linha {
+	
+}
+
+.grafico2 {
+	
+	width: 900px;
+	height: 500px;
+}
+
+.galeria {
+	width: 300px;
+	height: 300px;
+}
+
+
+
+
+
+
+
+

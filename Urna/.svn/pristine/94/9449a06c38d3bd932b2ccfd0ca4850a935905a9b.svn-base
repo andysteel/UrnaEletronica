@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>teste urna</title>
+</h:head>
+
+<h:body>
+<h:outputStylesheet name="Urna.css" library="css"/>
+
+<p:panel header="Urna Eletronica" styleClass="urna">
+
+
+<h:outputText value="#{candidatoBean.dao.getZakk().getNome()}"/>
+<p:graphicImage value="#{candidatoBean.dao.getZakk().getImagem()}"/>
+
+<!--<p:inputText maxlength="1" size="1" id="input1"/>
+
+<p:inputText maxlength="1" size="1" id="input2"/><p:inputText maxlength="1" size="1" id="input3"/>
+<p:graphicImage url="/resources/dime_1.jpg" height="200" width="100" id="foto1">
+	
+</p:graphicImage>
+
+	<p:panelGrid columns="3" styleClass="painel" columnClasses="c1,c2,c3">
+		<p:commandButton value="1"/><p:commandButton value="2"/><p:commandButton value="3"/>
+		<p:button value="4" styleClass="c1"/><p:button value="5"/><p:button value="6"/>
+		<p:button value="7"/><p:button value="8"/><p:button value="9"/>
+		<p:button value="BRANCO"/><p:button value="CORRIGIR"/><p:button value="VOTAR"/>
+	</p:panelGrid>-->
+</p:panel>
+
+<h:outputText value="#{candidatoBean.getNome()}"/>
+</h:body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/WEB-INF/templates/template.xhtml">
+
+<ui:define name="conteudo" >
+<h:body styleClass="corpo">
+<br/>
+<h:outputStylesheet name="Urna.css" library="css"/>
+<h:form>
+
+	<p:panelGrid columns="4" styleClass="grid2">
+		<p:outputLabel value="Acesse o sistema como: "/><p:commandLink value="Fiscal " action="loginf"/><p:outputLabel value="ou "/><p:commandLink value="Candidato" action="loginc"/>
+	</p:panelGrid>
+	<br/>
+	<br/>
+	<center>
+	<p:panelGrid columns="2">
+		<p:outputLabel value="Antes de votar conheça os candidatos desta eleição: " styleClass="texto1"/> <p:commandButton value="candidatos" action="propaganda"/>
+	</p:panelGrid>
+	</center>
+	<br/>
+	<br/>
+	<center>
+	<p:panelGrid columns="1">
+		<p:outputLabel value="Para iniciar seu voto clique na imagem abaixo" styleClass="texto1"/>
+		<h:outputLink value="ident.xhtml"><p:graphicImage value="/resources/vote.png"/></h:outputLink>
+	</p:panelGrid>
+	</center>
+</h:form>
+<br/>
+<br/>
+<br/>
+</h:body>
+</ui:define>
+</ui:composition>
+</html>

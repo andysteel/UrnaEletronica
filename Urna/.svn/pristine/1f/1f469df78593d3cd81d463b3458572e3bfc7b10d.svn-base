@@ -1,0 +1,68 @@
+package com.gmail.andresoninfonet.urna.modelo;
+
+public class Candidato {
+
+	private int c_id;
+	private String nome;
+	private String partido;
+	private String campanha;
+	private String imagem;
+	private int voto;
+	
+	public Candidato(int c_id, String nome, String partido, String campanha,
+			String imagem, int voto) {
+		super();
+		this.c_id = c_id;
+		this.nome = nome;
+		this.partido = partido;
+		this.campanha = campanha;
+		this.imagem = imagem;
+		this.voto = voto;
+	}
+	
+	
+	public Candidato() {
+		
+	}
+
+	
+	public int getC_id() {
+		return c_id;
+	}
+	public void setC_id(int c_id) {
+		this.c_id = c_id;
+	}
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	public String getPartido() {
+		return partido;
+	}
+	public void setPartido(String partido) {
+		this.partido = partido;
+	}
+	public String getCampanha() {
+		return campanha;
+	}
+	public void setCampanha(String campanha) {
+		this.campanha = campanha;
+	}
+	public String getImagem() {
+		return imagem;
+	}
+	public void setImagem(String imagem) {
+		this.imagem = imagem;
+	}
+	public int getVoto() {
+		return voto;
+	}
+	public void setVoto(int voto) {
+		this.voto = voto;
+	}
+	
+	
+	
+}
